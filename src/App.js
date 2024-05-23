@@ -1,25 +1,24 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
-import ResizeModal from './modal'; // Импортируем компонент модального окна для изменения размера
+import ResizeModal from './modal'; 
 
 function App() {
-  // Состояния компонента
-  const [image, setImage] = useState(); // Выбранное изображение
-  const [imageURL, setImageURL] = useState(''); // URL изображения
-  const [color, setColor] = useState(''); // Цвет под указателем мыши
-  const [position, setPosition] = useState({ x: 0, y: 0 }); // Координаты указателя мыши на холсте
-  const [scale, setScale] = useState(100); // Масштаб изображения
-  const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 }); // Размеры изображения
-  const [isModalOpen, setIsModalOpen] = useState(false); // Состояние модального окна для изменения размера
-  const canvasRef = useRef(null); // Ссылка на холст
-  const fileReader = new FileReader(); // Объект для чтения файлов
+  const [image, setImage] = useState(); 
+  const [imageURL, setImageURL] = useState(''); 
+  const [color, setColor] = useState(''); 
+  const [position, setPosition] = useState({ x: 0, y: 0 }); 
+  const [scale, setScale] = useState(100); 
+  const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 }); 
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const canvasRef = useRef(null); 
+  const fileReader = new FileReader(); 
 
-  // Обработчик завершения чтения файла
+ 
   fileReader.onloadend = () => {
     setImageURL(fileReader.result);
   };
 
-  // Обработчик выбора файла изображения
+  
   const handleOnChange = (event) => {
     event.preventDefault();
     const file = event.target.files[0];
@@ -27,13 +26,13 @@ function App() {
     fileReader.readAsDataURL(file);
   };
 
-  // Обновление координат указателя мыши
+
   const updatePosition = (e) => {
     const { offsetX, offsetY } = e.nativeEvent;
     setPosition({ x: offsetX, y: offsetY });
   };
 
-  // Обновление цвета при наведении на холст
+
   const updateColor = (e) => {
     if (!canvasRef.current) return;
     const ctx = canvasRef.current.getContext('2d');
@@ -42,13 +41,13 @@ function App() {
     setColor(`rgb(${r}, ${g}, ${b})`);
   };
 
-  // Обработчик движения мыши по холсту
+ 
   const handleMouseMove = (e) => {
     updateColor(e);
     updatePosition(e);
   };
 
-  // Отрисовка изображения на холсте с учетом масштаба
+
   const drawImage = (img, scale) => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
@@ -65,7 +64,7 @@ function App() {
     setImageDimensions({ width: Math.round(scaledWidth), height: Math.round(scaledHeight) });
   };
   
-  // Изменение размера изображения
+
   const resizeImage = ({ width, height }) => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
@@ -80,7 +79,7 @@ function App() {
     };
   };
 
-  // Сохранение изображения
+
   const saveImage = () => {
     const canvas = canvasRef.current;
     const link = document.createElement('a');
@@ -89,7 +88,7 @@ function App() {
     link.click();
   };
 
-  // Загрузка изображения при монтировании или изменении URL
+  
   useEffect(() => {
     if (!imageURL) return;
     const img = new Image();
@@ -107,7 +106,7 @@ function App() {
     };
   }, [imageURL]);
 
-  // Изменение масштаба изображения при изменении состояния scale
+ 
   useEffect(() => {
     if (!imageURL) return;
     const img = new Image();
