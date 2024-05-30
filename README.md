@@ -1,1 +1,1 @@
-http://lab1.std-1956.ist.mospolytech.ru/
+http://photoeditor.std-1956.ist.mospolytech.ru/
