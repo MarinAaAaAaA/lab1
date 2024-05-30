@@ -113,3 +113,15 @@
 .url-uploader {
   margin-top: 5px;
 }
+.uploader__canvas {
+  border: 1px solid black;
+}
+
+
+.canvas-container {
+  position: relative;
+  overflow: auto;
+  max-width: 800px; /* Установите максимальную ширину для видимости полос прокрутки */
+  max-height: 600px; /* Установите максимальную высоту для видимости полос прокрутки */
+}
+

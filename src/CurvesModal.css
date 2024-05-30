@@ -1,0 +1,53 @@
+.curves-modal-overlay {
+  color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.curves-modal {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 600px; /* Ширина модального окна */
+  max-width: 90%; /* Максимальная ширина, чтобы не заходить за края */
+  max-height: calc(100% - 40px); /* Максимальная высота, чтобы не заходить за края */
+  overflow: auto; /* Добавляем прокрутку, если содержимое больше размеров окна */
+  position: fixed; /* Фиксируем позицию, чтобы было удобно использовать right: 0; */
+  top: 50%; /* Положение по вертикали */
+  transform: translateY(-50%); /* Центрируем вертикально */
+  right: 0; /* Прижимаем к правому краю */
+}
+
+
+
+.curves-inputs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.curves-inputs div {
+  display: flex;
+  flex-direction: column;
+}
+
+.curves-inputs label {
+  margin-bottom: 10px;
+}
+
+.curves-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.curves-chart {
+  margin: 20px 0;
+}

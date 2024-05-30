@@ -1,0 +1,48 @@
+.pipette-info {
+    position: fixed;
+    color: black;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1000;
+    max-width: 300px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .close-button {
+    display: block;
+    margin-left: auto;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .color-swatch {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .secondary {
+    margin-top: 20px;
+  }
+  
+  .swatch {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+    border-radius: 4px;
+  }
+  
+  .color-details p {
+    margin: 0;
+    font-size: 14px;
+  }
+  

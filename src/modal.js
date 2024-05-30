@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './modal.css';
 
 function ResizeModal({ isOpen, onClose, imageWidth, imageHeight, onResize }) {
@@ -7,19 +7,26 @@ function ResizeModal({ isOpen, onClose, imageWidth, imageHeight, onResize }) {
   const [height, setHeight] = useState(100);
   const [maintainAspectRatio, setMaintainAspectRatio] = useState(true);
   const [interpolation, setInterpolation] = useState('nearest');
-  const originalPixels = (imageWidth * imageHeight) / 1000000;
+  const originalPixels = Math.round((imageWidth * imageHeight) / 1000000);
+
+  useEffect(() => {
+    setWidth(100);
+    setHeight(100);
+  }, [imageWidth, imageHeight]);
 
   const handleWidthChange = (e) => {
-    setWidth(e.target.value);
+    const newWidth = Math.round(e.target.value);
+    setWidth(newWidth);
     if (maintainAspectRatio) {
-      setHeight((e.target.value * imageHeight) / imageWidth);
+      setHeight(Math.round((newWidth * imageHeight) / imageWidth));
     }
   };
 
   const handleHeightChange = (e) => {
-    setHeight(e.target.value);
+    const newHeight = Math.round(e.target.value);
+    setHeight(newHeight);
     if (maintainAspectRatio) {
-      setWidth((e.target.value * imageWidth) / imageHeight);
+      setWidth(Math.round((newHeight * imageWidth) / imageHeight));
     }
   };
 
@@ -27,14 +34,21 @@ function ResizeModal({ isOpen, onClose, imageWidth, imageHeight, onResize }) {
     let newWidth = width;
     let newHeight = height;
     if (units === 'percent') {
-      newWidth = (imageWidth * width) / 100;
-      newHeight = (imageHeight * height) / 100;
+      newWidth = Math.round((imageWidth * width) / 100);
+      newHeight = Math.round((imageHeight * height) / 100);
+    } else {
+      newWidth = Math.round(width);
+      newHeight = Math.round(height);
     }
     onResize({ width: newWidth, height: newHeight });
     onClose();
   };
 
   if (!isOpen) return null;
+
+  const newPixels = units === 'percent'
+    ? Math.round((imageWidth * width / 100) * (imageHeight * height / 100) / 1000000)
+    : Math.round((width * height) / 1000000);
 
   return (
     <div className="modal-overlay">
@@ -77,8 +91,8 @@ function ResizeModal({ isOpen, onClose, imageWidth, imageHeight, onResize }) {
           </div>
         </div>
         <div>
-          <p>Исходные пиксели: {originalPixels.toFixed(2)} Мп</p>
-          <p>Новые пиксели: {((width * height) / 1000000).toFixed(2)} Мп</p>
+          <p>Исходные пиксели: {originalPixels} Мп</p>
+          <p>Новые пиксели: {newPixels} Мп</p>
         </div>
         <div className="modal-buttons">
           <button onClick={handleResize}>Применить</button>
